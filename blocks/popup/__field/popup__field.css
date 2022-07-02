@@ -11,7 +11,7 @@
   color: #000000;
 }
 
-.popup__field::-webkit-placeholder {
+.popup__field::-webkit-value {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
@@ -20,7 +20,7 @@
   color: #000000;
 }
 
-.popup__field::-ms-placeholder {
+.popup__field::-ms-value {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
@@ -29,7 +29,7 @@
   color: #000000;
 }
 
-.popup__field::-moz-placeholder {
+.popup__field::-moz-value {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
