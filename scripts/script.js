@@ -7,11 +7,11 @@ let popup = document.querySelector('.popup');
 let popupKrest = popup.querySelector('.popup__krest');
 
 function popupOpen() {
-  popup.classList.remove('popup__none');
+  popup.classList.remove('page__none');
 }
 
 function popupClose() {
-  popup.classList.add('popup__none')
+  popup.classList.add('page__none');
 }
 
 editButton.addEventListener('click', popupOpen);
