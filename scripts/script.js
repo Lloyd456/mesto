@@ -33,6 +33,7 @@ function formSubmitHandler (evt) {
     evt.preventDefault();
     textName.textContent = nameInput.value;
     jobName.textContent = jobInput.value;
+    popupClose();
 }
 
 // Прикрепляем обработчик к форме:
