@@ -16,11 +16,11 @@ let jobName = profile.querySelector('.profile__profession');
 function popupOpen() {
   nameInput.value = textName.textContent;
   jobInput.value = jobName.textContent;
-  popup.classList.remove('popup_none');
+  popup.classList.add('popup_opened');
 }
 
 function popupClose() {
-  popup.classList.add('popup_none');
+  popup.classList.remove('popup_opened');
 }
 
 editButton.addEventListener('click', popupOpen);
