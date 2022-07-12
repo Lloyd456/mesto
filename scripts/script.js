@@ -4,22 +4,22 @@ const profile = document.querySelector('.profile');
 const buttonEditProfile = profile.querySelector('.profile__edit-button');
 
 const popupProfile = document.querySelector('#popupProfile');
-const popupCloseEditProfile = popupProfile.querySelector('.popup__close');
+const popupEditCloseButton = popupProfile.querySelector('.popup__close');
 
-const formElementsProfile = popupProfile.querySelector('.popup__form');
-const nameInput = formElementsProfile.querySelector('#nameInput');
-const jobInput = formElementsProfile.querySelector('#jobInput');
+const formElementProfile = popupProfile.querySelector('.popup__form');
+const nameInput = formElementProfile.querySelector('#nameInput');
+const jobInput = formElementProfile.querySelector('#jobInput');
 
 const textName = profile.querySelector('.profile__name');
 const jobName = profile.querySelector('.profile__profession');
 
 //Функции открытия и закрытия попапов
-function openPopup(PopupChange) {
-  PopupChange.classList.add('popup_opened');
+function openPopup(popupChange) {
+  popupChange.classList.add('popup_opened');
 }
 
-function closePopup(PopupChange) {
-  PopupChange.classList.remove('popup_opened');
+function closePopup(popupChange) {
+  popupChange.classList.remove('popup_opened');
 }
 
 //Открытие профиля
@@ -34,7 +34,7 @@ function closePopupProfile() {
 }
 
 buttonEditProfile.addEventListener('click', openPopupProfile);
-popupCloseEditProfile.addEventListener('click', () => closePopup(popupProfile));
+popupEditCloseButton.addEventListener('click', () => closePopup(popupProfile));
 
 //Реализация изменений в профиле
 function submitFormHandlerProfile (evt) {
@@ -45,7 +45,7 @@ function submitFormHandlerProfile (evt) {
 }
 
 // Прикрепляем обработчик к форме:
-formElementsProfile.addEventListener('submit', submitFormHandlerProfile);
+formElementProfile.addEventListener('submit', submitFormHandlerProfile);
 
 //Реализуем кнопку лайка
 function makeLike(evt) {
@@ -53,14 +53,13 @@ function makeLike(evt) {
 }
 
 //Создание карточки
-const cardMestoTemplate = document.querySelector('#templateCard').content;
-const element = cardMestoTemplate.querySelector('.element');
+const cardTemplate = document.querySelector('#templateCard').content.querySelector('.element');
 const popupBigPicture = document.querySelector('#bigPicture');
 const popupBigPictureImage = popupBigPicture.querySelector('.popup__image');
 const popupBigPictureFooterText = popupBigPicture.querySelector('.popup__footer-text');
 
 function creatCard(name, image) {
-  const elementClone = element.cloneNode(true);
+  const elementClone = cardTemplate.cloneNode(true);
   const elementTitle = elementClone.querySelector('.element__title');
   const elementPhoto = elementClone.querySelector('.element__photo');
 
@@ -95,19 +94,20 @@ for (let i = 0; i < initialCards.length; ++i) {
 
 //Открытие и закрытие карточки создания
 const cardPopup = document.querySelector('#cardPopup');
+const formCardPopup = cardPopup.querySelector('.popup__form');
 const buttonAddCard = profile.querySelector('.profile__add-button');
 const cardClosePopup = cardPopup.querySelector('.popup__close');
 
 buttonAddCard.addEventListener('click', () => {
-  cardPopup.querySelector('#placeName').value = '';
-  cardPopup.querySelector('#imagePath').value = '';
+  formCardPopup.reset();
   openPopup(cardPopup);
 });
+
 cardClosePopup.addEventListener('click', () => closePopup(cardPopup));
 
 //Реализация добавления новой карточки
-const placeName = document.querySelector('#placeName');
-const imagePath = document.querySelector('#imagePath');
+const placeName = formCardPopup.querySelector('#placeName');
+const imagePath = formCardPopup.querySelector('#imagePath');
 
 function submitCardFormHandler (evt) {
   evt.preventDefault();
