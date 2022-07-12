@@ -4,4 +4,9 @@
   flex-direction: column;
   list-style-type: none;
   position: relative;
+  transition: transform 0.7s;
+}
+
+.element:hover {
+  transform: scale(1.1);
 }

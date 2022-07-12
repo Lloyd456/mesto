@@ -1,4 +1,4 @@
-.popup__krest {
+.popup__close {
   margin: 0;
   border: none;
   width: 35px;
@@ -11,13 +11,13 @@
   background-size: 32px 32px;
 }
 
-.popup__krest:hover {
+.popup__close:hover {
   opacity: 0.6;
   cursor: pointer;
 }
 
 @media screen and (max-width: 984px) {
-  .popup__krest {
+  .popup__close {
     right: 0;
     width: 20px;
     height: 20px;
