@@ -16,10 +16,30 @@ const jobName = profile.querySelector('.profile__profession');
 //Функции открытия и закрытия попапов
 function openPopup(popupChange) {
   popupChange.classList.add('popup_opened');
+  popupChange.addEventListener('click', closePopupOverlay);
+  document.addEventListener('keydown', closePopupByEsc);
 }
 
 function closePopup(popupChange) {
   popupChange.classList.remove('popup_opened');
+  popupChange.removeEventListener('click', closePopupOverlay);
+  document.removeEventListener('keydown', closePopupByEsc);
+}
+
+//Функция закрытия попапа через esc
+function closePopupByEsc(evt) {
+  if (evt.key === 'Escape') {
+    const popup = document.querySelector('.popup_opened');
+    closePopup(popup);
+  }
+}
+
+//Функция закрытия попапа через оверлей
+function closePopupOverlay(evt) {
+  if (evt.target === evt.currentTarget) {
+    const popup = document.querySelector('.popup_opened');
+    closePopup(popup);
+  }
 }
 
 //Открытие профиля
@@ -119,3 +139,12 @@ cardPopup.querySelector('.popup__form').addEventListener('submit', submitCardFor
 
 //Закрытие попапа с картинкой
 popupBigPicture.querySelector('.popup__close').addEventListener('click', () => closePopup(popupBigPicture));
+
+//Закрытие попапов кликом на оверлей
+const overlays = Array.from(document.querySelectorAll('.popup'));
+
+function setCloseListenersToOverlays(overlays) {
+  overlays.forEach(element => element.addEventListener('click', () => closePopup(document.querySelector(`#${element.id}`))));
+}
+
+//setCloseListenersToOverlays(overlays);
