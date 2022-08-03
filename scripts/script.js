@@ -142,9 +142,3 @@ popupBigPicture.querySelector('.popup__close').addEventListener('click', () => c
 
 //Закрытие попапов кликом на оверлей
 const overlays = Array.from(document.querySelectorAll('.popup'));
-
-function setCloseListenersToOverlays(overlays) {
-  overlays.forEach(element => element.addEventListener('click', () => closePopup(document.querySelector(`#${element.id}`))));
-}
-
-//setCloseListenersToOverlays(overlays);
