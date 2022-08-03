@@ -1,15 +1,25 @@
 const formCard = {
-  form: '.popup__form[name="card-form"]',
-  button: '.popup__button'
+  formSelector: '.popup__form[name="card-form"]',
+  inputSelector: '.popup__field',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_invalid',
+  activeButtonClass: 'popup__button_valid',
+  inputErrorClass: 'popup__field_error',
+  errorClass: 'popup__error'
 }
 
 const formProfile = {
-  form: '.popup__form[name="profile-form"]',
-  button: '.popup__button'
+  formSelector: '.popup__form[name="profile-form"]',
+  inputSelector: '.popup__field',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_invalid',
+  activeButtonClass: 'popup__button_valid',
+  inputErrorClass: 'popup__field_error',
+  errorClass: 'popup__error'
 }
 
 function enableValidation(config) {
-  const form = document.querySelector(config.form);
+  const form = document.querySelector(config.formSelector);
   form.addEventListener('submit', handleFormSubmit);
   form.addEventListener('input', (evt) => handleFormInput(evt, config));
 }
@@ -29,10 +39,9 @@ function handleFormSubmit(evt) {
 function handleFormInput(evt, config) {
   const input = evt.target;
   const form = evt.currentTarget;
-  console.log(input.value);
   setCustomError(input);
   showFieldError(input);
-  setLineInputState(input);
+  setLineInputState(input, config);
   setSubmitButtonState(form, config);
 }
 
@@ -41,7 +50,7 @@ function setCustomError(input) {
 
   input.setCustomValidity('');
 
-  if (validity.valueMissing && input.key === ' ') {
+  if (validity.valueMissing) {
     input.setCustomValidity('Вы пропустили это поле.');
   }
 
@@ -63,28 +72,28 @@ function showFieldError(input) {
 }
 
 function setSubmitButtonState(form, config) {
-  const button = form.querySelector(config.button);
+  const button = form.querySelector(config.submitButtonSelector);
 
   const isValid = form.checkValidity();
 
   if (isValid) {
     button.removeAttribute('disabled');
-    button.classList.remove('popup__button_invalid');
-    button.classList.add('popup__button_valid');
+    button.classList.remove(config.inactiveButtonClass);
+    button.classList.add(config.activeButtonClass);
   } else {
     button.setAttribute('disabled', true);
-    button.classList.remove('popup__button_valid');
-    button.classList.add('popup__button_invalid');
+    button.classList.remove(config.activeButtonClass);
+    button.classList.add(config.inactiveButtonClass);
   }
 }
 
-function setLineInputState(input) {
+function setLineInputState(input, config) {
   const isValidInput = input.validity.valid;
 
   if (isValidInput) {
-    input.classList.remove('popup__field_error');
+    input.classList.remove(config.inputErrorClass);
   } else {
-    input.classList.add('popup__field_error');
+    input.classList.add(config.inputErrorClass);
   }
 }
 

@@ -37,7 +37,7 @@ function closePopupByEsc(evt) {
 //Функция закрытия попапа через оверлей
 function closePopupOverlay(evt) {
   if (evt.target === evt.currentTarget) {
-    const popup = document.querySelector('.popup_opened');
+    const popup = evt.target;
     closePopup(popup);
   }
 }
@@ -119,7 +119,6 @@ const buttonAddCard = profile.querySelector('.profile__add-button');
 const cardClosePopup = cardPopup.querySelector('.popup__close');
 
 buttonAddCard.addEventListener('click', () => {
-  formCardPopup.reset();
   openPopup(cardPopup);
 });
 
@@ -131,6 +130,10 @@ const imagePath = formCardPopup.querySelector('#imagePath');
 
 function submitCardFormHandler (evt) {
   evt.preventDefault();
+  const button = evt.target.querySelector('.popup__button');
+  button.setAttribute('disabled', true);
+  button.classList.remove('popup__button_valid');
+  button.classList.add('popup__button_invalid');
   renderCard(elements, creatCard(placeName.value, imagePath.value));
   closePopup(cardPopup);
 }
@@ -139,6 +142,3 @@ cardPopup.querySelector('.popup__form').addEventListener('submit', submitCardFor
 
 //Закрытие попапа с картинкой
 popupBigPicture.querySelector('.popup__close').addEventListener('click', () => closePopup(popupBigPicture));
-
-//Закрытие попапов кликом на оверлей
-const overlays = Array.from(document.querySelectorAll('.popup'));
